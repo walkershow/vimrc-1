@@ -7,7 +7,7 @@ set tabstop=4       " The width of a TAB is set to 4.
 set shiftwidth=4    " Indents will have a width of 4
 set softtabstop=4   " Sets the number of columns for a TAB
 
-set autoindent
+set smartindent
 
 set hlsearch
 set cursorline
@@ -22,6 +22,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tomasr/molokai'
 Plug 'Yggdroot/indentLine'
+Plug 'jiangmiao/auto-pairs'
 call plug#end()
 
 " vim-gitgutter
