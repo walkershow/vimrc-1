@@ -14,7 +14,7 @@ set cursorline
 
 
 
-call plug#begin()
+call plug#begin('~/.vim/plugged')
 Plug 'rust-lang/rust.vim'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --racer-completer' }
 Plug 'airblade/vim-gitgutter'
@@ -23,6 +23,8 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'tomasr/molokai'
 Plug 'Yggdroot/indentLine'
 Plug 'jiangmiao/auto-pairs'
+Plug 'scrooloose/nerdtree'
+Plug 'ntpeters/vim-better-whitespace'
 call plug#end()
 
 " vim-gitgutter
@@ -38,7 +40,11 @@ colorscheme molokai
 set encoding=utf-8
 
 " indentLine
-let g:indentLine_enabled = 0
+" let g:indentLine_enabled = 0
+let g:indentLine_char = '│'
+let g:indentLine_concealcursor = 'inc'
+let g:indentLine_conceallevel = 2
+
 
 " custom commands
 :command Gtd YcmCompleter GoToDefinition
