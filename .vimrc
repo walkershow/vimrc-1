@@ -20,6 +20,9 @@ au CursorHold * checktime
 " enable mouse support
 "set mouse=a
 
+" stop fcking cursor blinking in Neovim
+set guicursor=a:block-blinkon1
+
 
 call plug#begin('~/.vim/plugins')
 
@@ -35,10 +38,15 @@ Plug 'scrooloose/nerdtree'
 Plug 'tomasr/molokai'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'vim-syntastic/syntastic', { 'for': 'rust' }
+Plug 'vim-syntastic/syntastic', { 'for': ['rust', 'python'] }
 
-" the most expensive plugin
-Plug 'Valloric/YouCompleteMe', { 'for': 'rust', 'do': './install.py --racer-completer' }
+if has('nvim')
+	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+	Plug 'sebastianmarkow/deoplete-rust', { 'for': 'rust' }
+	Plug 'zchee/deoplete-jedi', { 'for': 'python' }
+else
+	Plug 'Valloric/YouCompleteMe', { 'for': ['rust', 'python'], 'do': './install.py --racer-completer' }
+endif
 
 call plug#end()
 
@@ -80,11 +88,21 @@ let g:syntastic_rust_rustc_fname = ''
 let g:syntastic_rust_rustc_args = '--'
 let g:syntastic_rust_checkers = ['rustc']
 
+" Deoplete
+let g:deoplete#enable_at_startup = 1
+
+" Deoplete-Rust
+let g:deoplete#sources#rust#racer_binary=$HOME.'/.cargo/bin/racer'
+let g:deoplete#sources#rust#rust_source_path=$RUST_SRC_PATH
+
 
 
 " custom commands
-map gd :YcmCompleter GoToDefinition<CR>
-map <leader>gd :YcmCompleter GetDoc<CR>
+if has('nvim')
+	map gd :DeopleteRustGoToDefinitionDefaut<CR>
+else
+	map gd :YcmCompleter GoToDefinition<CR>
+endif
 
 map nt :NERDTreeToggle<CR>
 
