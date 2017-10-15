@@ -18,13 +18,16 @@ set autoread
 au CursorHold * checktime
 
 " enable mouse support
-"set mouse=a
+" set mouse=a
 
 " stop fcking cursor blinking in Neovim
 set guicursor=a:block-blinkon1
 
+" specify plugin directory
+let plugin_dir = $HOME . '/.vim/plugins/'
 
-call plug#begin('~/.vim/plugins')
+
+call plug#begin(plugin_dir)
 
 Plug 'Yggdroot/indentLine'
 Plug 'airblade/vim-gitgutter'
@@ -53,8 +56,10 @@ call plug#end()
 
 " color scheme
 syntax enable
-colorscheme molokai
 set encoding=utf-8
+if isdirectory(plugin_dir . 'molokai')
+	colorscheme molokai
+endif
 
 
 " vim-gitgutter
@@ -75,9 +80,11 @@ let g:goyo_width = '60%'
 let g:goyo_height = '80%'
 
 " Syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+if isdirectory(plugin_dir . 'syntastic')
+	set statusline+=%#warningmsg#
+	set statusline+=%{SyntasticStatuslineFlag()}
+	set statusline+=%*
+endif
 let g:syntastic_loc_list_height=4
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
@@ -92,8 +99,8 @@ let g:syntastic_rust_checkers = ['rustc']
 let g:deoplete#enable_at_startup = 1
 
 " Deoplete-Rust
-let g:deoplete#sources#rust#racer_binary=$HOME.'/.cargo/bin/racer'
-let g:deoplete#sources#rust#rust_source_path=$RUST_SRC_PATH
+let g:deoplete#sources#rust#racer_binary = $HOME . '/.cargo/bin/racer'
+let g:deoplete#sources#rust#rust_source_path = $RUST_SRC_PATH
 
 
 
@@ -104,7 +111,6 @@ else
 	map gd :YcmCompleter GoToDefinition<CR>
 endif
 
-map nt :NERDTreeToggle<CR>
-
+map nt   :NERDTreeToggle<CR>
 map <F2> :NERDTreeFind<CR> <c-w><c-p>
 
