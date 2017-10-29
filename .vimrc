@@ -11,6 +11,7 @@ set smartindent
 
 set hlsearch
 set cursorline
+set lazyredraw
 
 " check file change every 4 seconds ('CursorHold')
 " and reload the buffer upon detecting change
@@ -121,5 +122,4 @@ else
 									map gd <c-]>
 	autocmd Filetype python,rust	map gd :YcmCompleter GoToDefinition<CR>
 endif
-
 
