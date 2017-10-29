@@ -123,3 +123,7 @@ else
 	autocmd Filetype python,rust	map gd :YcmCompleter GoToDefinition<CR>
 endif
 
+
+" per project .vimrc
+set exrc
+set secure
