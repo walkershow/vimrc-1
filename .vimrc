@@ -44,9 +44,9 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-syntastic/syntastic', { 'for': ['rust', 'python'] }
 
 if has('nvim')
-	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-	Plug 'sebastianmarkow/deoplete-rust', { 'for': 'rust' }
-	Plug 'zchee/deoplete-jedi', { 'for': 'python' }
+	Plug 'zchee/deoplete-jedi',				{ 'for': 'python' }
+	Plug 'sebastianmarkow/deoplete-rust',	{ 'for': 'rust' }
+	Plug 'Shougo/deoplete.nvim',			{ 'do': ':UpdateRemotePlugins' }
 else
 	Plug 'Valloric/YouCompleteMe', { 'for': ['rust', 'python'], 'do': './install.py --racer-completer' }
 endif
@@ -102,15 +102,24 @@ let g:deoplete#enable_at_startup = 1
 let g:deoplete#sources#rust#racer_binary = $HOME . '/.cargo/bin/racer'
 let g:deoplete#sources#rust#rust_source_path = $RUST_SRC_PATH
 
+" NERDTree
+map nt   :NERDTreeToggle<CR>
+map <F2> :NERDTreeFind<CR> <c-w><c-p>
 
+" FZF
+let g:fzf_history_dir = '~/.fzf_history'
+map fzf  :FZF<CR>
+map fzt  :Tags<CR>
+map fzb  :BTags<CR>
+map fzc  :Commits<CR>
+map ;    :Buffers<CR>
 
 " custom commands
 if has('nvim')
-	map gd :DeopleteRustGoToDefinitionDefaut<CR>
+	autocmd Filetype rust			map gd :DeopleteRustGoToDefinitionDefaut<CR>
 else
-	map gd :YcmCompleter GoToDefinition<CR>
+									map gd <c-]>
+	autocmd Filetype python,rust	map gd :YcmCompleter GoToDefinition<CR>
 endif
 
-map nt   :NERDTreeToggle<CR>
-map <F2> :NERDTreeFind<CR> <c-w><c-p>
 
