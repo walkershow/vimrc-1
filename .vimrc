@@ -115,6 +115,10 @@ map fzb  :BTags<CR>
 map fzc  :Commits<CR>
 map ;    :Buffers<CR>
 
+" sessions
+map 's   :mksession! ~/.vim/session <CR>
+map 'r   :source     ~/.vim/session <CR>
+
 " custom commands
 if has('nvim')
 	autocmd Filetype rust			map gd :DeopleteRustGoToDefinitionDefaut<CR>
