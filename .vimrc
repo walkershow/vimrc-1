@@ -30,25 +30,39 @@ let plugin_dir = $HOME . '/.vim/plugins/'
 
 call plug#begin(plugin_dir)
 
-Plug 'Yggdroot/indentLine'
-Plug 'airblade/vim-gitgutter'
-Plug 'cespare/vim-toml'
-Plug 'jiangmiao/auto-pairs'
-Plug 'junegunn/fzf.vim'
-Plug 'junegunn/goyo.vim'
-Plug 'ntpeters/vim-better-whitespace'
-Plug 'rust-lang/rust.vim', { 'for': 'rust' }
-Plug 'scrooloose/nerdtree'
-Plug 'tomasr/molokai'
-Plug 'vim-airline/vim-airline'
+" Look & feel (interface)
+Plug 'tomasr/molokai'			" color scheme
+Plug 'junegunn/fzf.vim'			" fuzzy search
+Plug 'junegunn/goyo.vim'		" non-distract mode
+Plug 'scrooloose/nerdtree'		" file menu
+Plug 'vim-airline/vim-airline'	" bottom bar
 Plug 'vim-airline/vim-airline-themes'
+
+" git
+Plug 'airblade/vim-gitgutter'	" show line status
+Plug 'tpope/vim-fugitive'		" show branch + cmds
+
+" formatting
+Plug 'Yggdroot/indentLine'		" show indentation lines
+Plug 'jiangmiao/auto-pairs'		" autocomlete ([{
+Plug 'ntpeters/vim-better-whitespace'
+
+" Linter for rust & python
 Plug 'vim-syntastic/syntastic', { 'for': ['rust', 'python'] }
 
+" rust
+Plug 'cespare/vim-toml'
+Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+
 if has('nvim')
+	" python
 	Plug 'zchee/deoplete-jedi',				{ 'for': 'python' }
+	" rust
 	Plug 'sebastianmarkow/deoplete-rust',	{ 'for': 'rust' }
+	" autocompletion engine
 	Plug 'Shougo/deoplete.nvim',			{ 'do': ':UpdateRemotePlugins' }
 else
+	" autocompletion engine
 	Plug 'Valloric/YouCompleteMe', { 'for': ['rust', 'python'], 'do': './install.py --racer-completer' }
 endif
 
